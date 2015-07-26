@@ -9,10 +9,11 @@
   <p><%= image_tag @article.image.url %></p>  
 <% end %>
 <p> <%= @article.body %></p>
-
-<%= link_to "delete", article_path(@article), method: :delete, 
+<% if logged_in? %>
+  <%= link_to "delete", article_path(@article), method: :delete, 
                       data: {confirm: "Delete this article?"} %> 
-<%= link_to "edit", edit_article_path(@article) %>
+  <%= link_to "edit", edit_article_path(@article) %>
+<% end %>
 
 <h4>Comments (<%= @article.comments.size %>)</h4>
 <%= render partial:'articles/comment', collection: @article.comments %>
